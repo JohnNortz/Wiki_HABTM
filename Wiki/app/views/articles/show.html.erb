@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @article.subject %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @article.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_article_path(@article) %> :| |:
+<%= link_to 'Back', articles_path %>
+
+<p>
+|| Comments ||
+</p>
+<table>
+  <tr>
+    <th>Editors</th>
+  </tr>
+  <tr>
+  <% @article.editors.each do |editor|%>
+    <td><%= editor.name %></td>
+    <td> </td>
+    <td><%= link_to 'Show', editor_path(current_editor) %></td>
+  </tr>
+  <% end %>
+
