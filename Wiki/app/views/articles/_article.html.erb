@@ -1,0 +1,10 @@
+<li id="<%= dom_id article %>">
+  <h3>Subject : <%= article.subject %> </h3>
+  <div><%= article.content %></div>
+  <div>
+    <%= link_to 'Show', article %> -
+    <%= link_to 'Edit', edit_article_path(article), remote: true %> -
+    <%= link_to 'Destroy', article, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <div>..............................................................</div>
+</li>

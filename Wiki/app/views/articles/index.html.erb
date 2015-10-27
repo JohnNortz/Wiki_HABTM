@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1 id="articles">Listing Articles</h1>
+
+
+  <tbody id="articles_table">
+    <div class="list_articles">
+      <% @articles.each do |article| %>
+        <%= render article %>
+      <% end %>
+    </div>
+  </tbody>
+
+<br>
+
+<%= link_to 'New Article', new_article_path, id: "new_link", remote: true %>
