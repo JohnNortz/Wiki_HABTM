@@ -1,29 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Articles</h1>
+<h1 id="articles">Listing Articles</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Subject</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.subject %></td>
-        <td><%= article.content %></td>
-        <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <tbody id="articles_table">
+    <div class="list_articles">
+      <% @articles.each do |article| %>
+        <%= render article %>
+      <% end %>
+    </div>
   </tbody>
-</table>
 
 <br>
 
-<%= link_to 'New Article', new_article_path %>
+<%= link_to 'New Article', new_article_path, id: "new_link", remote: true %>

@@ -25,31 +25,22 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
-    respond_to do |format|
-      if @article.save
-        @article.editors << current_editor unless @article.editors.include? current_editor
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      #@article.editors << current_editor unless @article.editors.include? current_editor
+      flash[:success] = 'Article was successfully created.'
+    else
+      render text: @article.error.full_message.join, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        @article.editors << current_editor unless @article.editors.include? current_editor
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.update(article_params)
+      #@article.editors << current_editor unless @article.editors.include? current_editor
+      flash[:success] = 'Article was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,8 +49,9 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to articles_path, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
